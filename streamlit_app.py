@@ -2,6 +2,11 @@ import streamlit as st
 
 
 st.title('My first streamlit title')
-st.title('My first streamlit header')
-st.title('My first streamlit text')
-st.title('My second streamlit text')
+st.header('My first streamlit header')
+st.text('My first streamlit text')
+st.text('My second streamlit text')
+
+st.header('Breakfast Menu')
+st.text('Omega 3 & Blueberry Oatmeal')
+st.text('Kale, Spinach & Rocket Smoothie')
+st.text('Hard-Boiled Free-Range Egg')
