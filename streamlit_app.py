@@ -29,15 +29,20 @@ st.dataframe(fruits_to_show)
 
 
 st.header("Fruityvice Fruit Advice!")
-fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
-st.write('The user entered ', fruit_choice)
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
-#st.text(fruityvice_response.json())
-# takes the json version of response and normalize it
-fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-# output it the data as table in screen
-st.dataframe(fruityvice_normalized)
-
+try:
+  fruit_choice = st.text_input('What fruit would you like information about?')
+  if not fruit_choice:
+    st.error("pls select a fruit to get information")
+  else:
+    #st.write('The user entered ', fruit_choice)
+    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+    #st.text(fruityvice_response.json())
+    # takes the json version of response and normalize it
+    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+    # output it the data as table in screen
+    st.dataframe(fruityvice_normalized)
+except URLError as e:
+  st.error()
 
 st.stop()
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
